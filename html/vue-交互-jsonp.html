@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue交互</title>
+</head>
+<body>
+<div id="contentBox">
+    <input type="text" v-model="t1" @keyup="get()" >
+    <ul>
+        <li v-for="value in myData" >
+            {{value}}
+        </li>
+    </ul>
+    <p v-show="myData.length==0" >暂无数据...</p>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#contentBox",
+            data:{
+                myData:[],
+                t1:""
+            },
+            methods:{
+                    get:function(){
+                        this.$http.jsonp('https://sug.so.360.cn/suggest',{
+                            word:'a'
+                        }).then(function(res){
+                            alert(res.data.s);
+                        },function(res){
+                            alert(res.status);
+                        });
+                    }
+                }
+            })
+
+    </script>
+</body>
+</html>

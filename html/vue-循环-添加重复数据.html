@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue交互</title>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="添加" @click="add">
+        <ul>
+            <li v-for="value in arr" track-by="$index" >{{value}}</li>
+        </ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <script>
+        var vm = new Vue({
+                data:{
+                    msg:"wellcome",
+                    arr:["apple","pear","orange"]
+                },
+                methods: {
+                    add:function() {
+                        this.arr.push("tomato")
+                    }
+                }
+            }).$mount("#box");
+
+    </script>
+</body>
+</html>
