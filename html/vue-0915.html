@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-0915</title>
+    <link rel="stylesheet" href="../css/vue-0915.css">
+   
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <span v-bind:title="message1">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+
+    <div id="app-3">
+        <p v-if="seen" >现在你可以看到我了</p>
+    </div>
+
+    <div id="app-4">
+        <ol>
+            <li v-for="item in todos" >
+                {{item.text}}
+            </li>
+        </ol>
+    </div>
+
+    <div id="app-5">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage" >逆转消息</button>
+    </div>
+    
+
+    <div id="app-6">
+        <p>message</p>
+        <input v-model="message" v-bind:id="id">
+    </div>
+
+    <div id="app-7">
+        <ol>
+           <!--
+            现在我们为每个 todo-item 提供 todo 对象
+            todo 对象是变量，即其内容可以是动态的。
+            我们也需要为每个组件提供一个“key”，稍后再
+            作详细解释。
+            -->
+            <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+             </todo-item>
+        </ol>
+    </div>
+
+    <div id="example">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}", {{otherMessage}}</p>
+    </div>
+
+    <div id="demo">
+        {{fullName }}
+    </div>
+       
+    <div id="watch-example">
+        <p>
+            Ask a yes/no question:
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
+
+    <ul id="demo2">
+        <li class="static" v-bind:class="{ 'active': isActive, 'text-danger': hasError }" >款拉丝粉了会计师考虑</li>
+        <li>阿斯加德付款哈市复健科</li>
+    </ul>
+
+    <div id="demo3">
+        <p v-bind:class="classObject" >家考虑到积分卡死了放假萨克雷锋</p>
+        <div v-bind:class="classObject">阿帆发送</div>
+    </div>
+
+    <div id="demo4">
+        <p v-bind:class="[activeClass,errorClass]">咖啡机奥斯卡冷风机</p>
+        <div v-bind:class="[{ active: isActive }, errorClass]">fsafsfd</div>
+    </div>
+
+    <div id="demo5">
+        <h3 v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}" >对象语法</h3>
+        <h4 v-bind:style="styleObject">阿什顿发顺丰</h4>
+    </div>
+
+    <div id="demo6">
+        <h4 v-bind:style="classObject">wuxiong</h4>
+    </div>
+
+    <div id="demo7">
+        <div v-bind:class="[baseStyles, overridingStyles]">how are you</div>
+    </div>
+
+    <h1 v-if="ok">Yes</h1>
+    <h1 v-else>No</h1>
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+
+    <ul id="example-1">
+        <li v-for="item in language">
+            {{ item.message }}
+        </li>
+    </ul>
+
+    <ul id="example-2">
+        <li v-for="(item, index) in items">
+            {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
+    </ul>
+
+    <ul id="v-for-object" class="demo">
+        <li v-for="value in obj">
+            {{ value }}
+        </li>
+        <li v-for="(value, key) in obj">
+            {{ key }}: {{ value }}
+        </li>
+        <li v-for="(value, key, index) in obj">
+            {{ index }}. {{ key }}: {{ value }}
+        </li>
+    </ul>
+
+    <div id="todo-list-example">
+        <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">Add a todo</label>
+            <input v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat"  >
+            <button>Add</button>
+        </form>
+        <ul>
+            <li is="todo-item" v-for="(todo,index) in todos" v-bind:key="todo.id"  v-bind:title="todo.title" v-on:remove="todos.splice(index, 1)"></li>
+        </ul>
+    </div>
+   
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>    
+    <script src="../js/vue-0915.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+        var watchExampleVM = new Vue({
+            el: '#watch-example',
+            data: {
+                question: '',
+                answer: 'I cannot give you an answer until you ask a question!'
+            },
+            watch: {
+                // 如果 `question` 发生改变，这个函数就会运行
+                question: function (newQuestion, oldQuestion) {
+                this.answer = 'Waiting for you to stop typing...'
+                this.debouncedGetAnswer()
+                }
+            },
+            created: function () {
+                // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+                // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+                // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+                // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+                // 请参考：https://lodash.com/docs#debounce
+                this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+            },
+            methods: {
+                getAnswer: function () {
+                if (this.question.indexOf('?') === -1) {
+                    this.answer = 'Questions usually contain a question mark. ;-)'
+                    return
+                }
+                this.answer = 'Thinking...'
+                var vm = this
+                axios.get('https://yesno.wtf/api')
+                    .then(function (response) {
+                    vm.answer = _.capitalize(response.data.answer)
+                    })
+                    .catch(function (error) {
+                    vm.answer = 'Error! Could not reach the API. ' + error
+                    })
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

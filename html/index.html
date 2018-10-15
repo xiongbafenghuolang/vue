@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue js</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <input type="text" v-model="message">
+
+        <pre>
+            {{ $data|json}}
+        </pre>
+    </div>
+
+    <div id="app1">
+        <form>
+            <p class="error" v-show="!message" >You must enter a message to submit</p>
+            <textarea v-model="message" ></textarea>
+            <button v-show="message" >Send message</button>
+        </form>
+        <pre>{{ $data|json}}</pre>
+    </div>
+
+    <div id="app2">
+        <p>{{username}}</p>
+        <input type="text" v-model="first">
+        <input type="text" v-model="last" >
+    </div>
+
+    <div id="app3">
+        <ul>
+            <li v-for="(value,index ) in arr" >{{value}} {{index}}</li>
+        </ul>
+        <ul>
+            <li v-for="(item,key,index) in json">{{item}} {{key}} {{index}}</li>
+        </ul>
+        <button v-on:mouseover="add()" >点击</button>
+    </div>
+
+    <div id="app4">
+        <div v-show="" style="width:100px;height:100px;background:red;" ></div>
+        <button v-on:click="flag" >点击</button>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script> 
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data: {
+                message:"hello word!"
+            }
+        })
+
+        app.message = "How are you?"
+
+        new Vue({
+            el:"#app1",
+            data: {
+                message:""
+            }
+        })
+
+        new Vue({
+            el:"#app2",
+            data: {
+                first:"wu",
+                last:"xiong"
+            },
+            computed:{
+                username:function(){
+                    return this.first + ' ' + this.last;
+                }
+            }
+        })
+
+        new Vue({
+            el:"#app3",
+            data: {
+                arr:['apple','banana','orange','pear','tomato'],
+                json:{a:'banana',b:'orange',c:'pear'}
+            },
+            methods: {
+                add:function() {
+                    this.arr.push('cuke')
+                }
+            }
+        })
+
+        new Vue({
+            el:"#app4",
+            data: {
+                flag:true
+            }
+        })
+    </script>
+</body>
+</html>

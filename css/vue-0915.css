@@ -1,0 +1,36 @@
+html, body {
+    margin: 5px;
+    padding: 0;
+}
+
+ul,li {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    height: 40px;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 14px;
+}
+
+.static {color: grey;}
+
+.active {
+    background: red;
+    font-size: 18px;
+}
+
+.text-danger {
+    height: 60px;
+    line-height: 60px;
+    background: green;
+}
+
+.baseStyles {
+    color: blue;
+}
+
+.overridingStyles {
+    font-size: 20px;
+}

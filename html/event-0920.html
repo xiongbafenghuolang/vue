@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/event-0920.css">
+</head>
+<body>
+    <div id="example-1">
+        <button v-on:click="counter += 1" >Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+
+    <div id="example-2">
+        <button v-on:click="greet" >Greet</button>
+    </div>
+
+    <div id="example-3">
+        <button v-on:click="say('hi')" >Say hi</button>
+        <button v-on:click="say('what')" >Say what</button>
+    </div>
+
+    <div id="example-4">
+        <button v-on:click="warn('Form cannot be submitted yet',$event)" >Submit</button>
+    </div>
+
+    <div id="example-5">
+        <input v-model="message" placeholder="edit me" >
+        <p>Message is:{{message }}</p>
+
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="add multiple lines"></textarea>
+    </div>
+
+    <div id="example-6">
+        <input type="checkbox" name="" id="checkbox" v-model="checked">
+        <label for="checkbox">{{checked }}</label>
+    </div>
+
+    <div id='example-7'>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+
+    <div id="example-8">
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+
+    <div id="example-9">
+        <select v-model="selected" name="" id="">
+            <option disabled  value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <input v-model.number="age" type="number">
+
+    <div id="components-demo">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+
+    <alert-box>
+        Something bad happened.
+    </alert-box>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+    <script src="../js/event-0920.js" ></script>
+</body>
+</html>

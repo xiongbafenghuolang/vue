@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue简易留言板</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+   <div class="container" id="outer-box" >
+       <form role="form">
+            <div class="form-group">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" class="form-control" v-model="username" placeholder="输入用户名" >
+            </div>
+            <div class="form-group">
+                <label for="age">年 龄：</label>
+                <input type="text" id="age" class="form-control" v-model="age" placeholder="输入年龄" >
+            </div>
+            <div class="form-group">
+                <input type="button" value="添加" class="btn btn-primary" v-on:click="add()" >
+                <input type="reset" value="重置" class="btn btn-danger">
+            </div>
+       </form>
+       <hr>
+       <h4 class="h5 text-info text-center" >用户信息表</h4>
+       <table class="table table-bordered table-hover" >
+            <tr class="text-danger" >
+                <th class="text-center" >序号</th>
+                <th class="text-center" >姓名</th>
+                <th class="text-center" >年龄</th>
+                <th class="text-center" >操作</th>
+            </tr>
+            <tr  class="text-center" v-for="(item,index) in myData" >
+                <td>{{index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td class="text-center" >
+                    <button v-on:click="nowIndex=index" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" >删除</button>
+                </td>
+            </tr>
+            <tr v-show="myData.length!=0" >
+                <td colspan="4" class="text-right" >
+                    <button  class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=-2" > 删除全部</button>
+                </td>
+            </tr>
+            <tr v-show="myData.length==0" >
+                <td colspan="4" class="text-center text-muted" >
+                    暂无数据。。。
+                </td>
+            </tr>
+       </table>
+
+       <!-- 模态框（弹出框） -->
+       <div role="dialog" class="modal fade" id="layer">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" >确认删除吗？</h4>
+                        <button type="button" class="close" data-dismiss="modal" >
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-right">
+                        <button data-dismiss="modal"  class="btn btn-primary btn-sm" >取消</button>
+                        <button data-dismiss="modal" class="btn btn-danger btn-sm" v-on:click="deleteMsg(nowIndex)" >确认</button>
+                    </div>
+                </div>
+            </div>
+       </div>
+
+   </div>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#outer-box",
+            data: {
+                myData:[],
+                username:'',
+                age:'',
+                nowIndex:-100,
+                deleteText:'确认全部删除吗？'
+            },
+            methods: {
+                add:function(){
+                    this.myData.push({
+                        name:this.username,
+                        age:this.age
+                    })
+                    this.username = '',
+                    this.age = ''
+                },
+                deleteMsg:function(n) {
+                    if(n==-2) {
+                       this.myData.splice(n)
+                    } else {
+                        this.myData.splice(n,1)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

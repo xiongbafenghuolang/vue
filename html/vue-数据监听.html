@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据监听</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="box">
+       {{a | json}}
+       <br>
+       {{b}}
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script> -->
+    <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script>
+    <script>
+    
+        // var vm =  new Vue({
+        //         data:{
+        //             a:100,
+        //             b:200
+        //         },
+        //         computed: {
+        //             b:function(){
+        //                 return this.a+1; //值
+        //             }
+        //         }                 
+        //     }).$mount("#box")
+
+         var vm =  new Vue({
+                data:{
+                    a:{name:'wyatt',age:25},
+                    b:200
+                }               
+            }).$mount("#box")
+
+            vm.$watch('a',function(){
+                alert("发生变化了")
+            },{deep:true})
+
+        document.onclick = function(){
+            vm.a.name = 'wuxiong';
+        }
+    </script>
+</body>
+</html>

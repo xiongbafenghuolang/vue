@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,ul,li{padding: 0;margin: 0;}
+        ul,li {
+            list-style: none;
+        }
+
+        header {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: grey;
+        }
+        header ul {
+            width: 100%;
+        }
+        header ul li {
+            width: 20%;
+            float: left;
+            text-align: center;
+        }
+
+        section {
+            width: 80%;
+            border: 1px solid red;
+            margin: 0 auto;
+        }
+
+        section li {
+            height: 60px;
+            border-bottom: 1px solid #dedede;
+        }
+
+        .outer-box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+            position: relative;
+        }
+        
+        .inner-box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 50px;
+            height: 50px;
+            margin: auto;
+            background-color: greenyellow;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            border: 0;
+            background: transparent;
+            background: url(../img/delete.png) no-repeat center;
+            background-size: 50%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href="#one" >第一章</a></li>
+            <li><a href="#two" >第二章</a></li>
+            <li><a href="#thr" >第三章</a></li>
+            <li><a href="#fou" >第四章</a></li>
+            <li><a href="#fiv" >第五章</a></li>
+        </ul>
+    </header>
+    <section>
+        <ul id="one" >
+            <li>111111111111111111111</li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul id="two" >
+            <li>22222222222222222222222</li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul id="thr" >
+            <li>33333333333333333333333</li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="outer-box">
+            <div class="inner-box"></div>
+        </div>
+    </section>
+</body>
+</html>
