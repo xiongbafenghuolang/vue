@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script> -->
+    <script>
+        window.onload = function(){
+            var vm = new Vue({
+                el:"#box",
+                data: {
+                    msg:"welcome vue 2.0 循环",
+                    list:{
+                        a:"apple",
+                        b:"banana",
+                        c:"tomato"
+                    }
+                },
+                methods:{
+                    add(){
+                        // this.list.d="sadf";
+                        console.log(this.list.a)
+                    }
+                }
+            })
+        }
+       
+    </script>
+</head>
+<body>
+    <div id="box">
+        {{msg}}
+        <input type="button" value="添加" @click="add" >
+      <ul>
+            <!-- vue1.0 -->
+            <!-- <li v-for="val in list" track-by="$index" >{{val}}</li>   -->
+
+            <!-- vue2.0 -->
+            <li v-for="(val,key) in list" >
+                {{val}} {{key}}
+            </li>
+      </ul>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script> -->
+    <script>
+
+        window.onload=function(){
+            var vm = new Vue({
+                el:"#box",
+                data: {
+                    msg:'welcome vue'
+                },
+                beforeCreate(){
+                    console.log('组件实例刚刚别创建')
+                },
+                created(){
+                    console.log('实例已被创建，dom还未生成')
+                },
+                beforeMount(){
+                    console.log('模板编译之前')
+                },
+                mounted(){
+                    console.log('模板已经编译完成')
+                }
+            });
+        } 
+    </script>
+</head>
+<body>
+    <div id="box">
+        {{msg}}
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script> -->
+    <script>
+        var Home = {    //这是2.0组件
+            template:"#aaa"
+        };          //Vue.extend()
+        
+        Vue.component("my-aaa",Home)
+
+        window.onload=function(){
+            var vm = new Vue({
+                el:"#box",
+                data: {
+                    msg:'welcome vue'
+                }
+            });
+        } 
+    </script>
+</head>
+<body>
+    <div id="box">
+        <my-aaa></my-aaa>
+        {{msg}}
+    </div>
+    <template id="aaa" >
+        <div>
+            <h3>我是组件aaa</h3><strong>我是加粗标签</strong>
+        </div>
+    </template>
+</body>
+</html>
