@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义过滤器</title>
+    <style>
+        .list {
+            border-bottom: 1px solid #dcdcdc;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script> -->
+    <script>
+    //准备一个空的实例对象
+    var Event = new Vue();
+
+     var A = {
+        template:`
+            <div class="list" >
+                <h3>我是A组件-》{{myData}}</h3>
+                <input type="button" value="把A数据传给C" @click="send" >
+                <p>接受过来的C的数据为：{{c}}</p>
+            </div>
+        `,
+        data(){
+            return {
+                myData:"我是a数据",
+                c:""
+            }
+        },
+        mounted(){
+            Event.$on("c-msg",function(data){
+                this.c = data;
+            }.bind(this))
+        },
+        methods:{
+            send(){
+                Event.$emit('a-msg',this.myData)
+            }
+        }
+     };
+
+     var B = {
+        template:`
+            <div class="list" >
+                <h3>我是B组件-》{{myData}}</h3>
+                <input type="button" value="把B数据传给C" @click="send" >
+                <p>bbbbbbbbbbbbbbbbbb</p>
+            </div>
+        `,
+        data(){
+            return {
+                myData:"我是b数据"
+            }
+        },
+        methods:{
+            send(){
+                Event.$emit("b-msg",this.myData)
+            }
+        }
+     };
+
+     var C = {
+        template:`
+            <div  class="list" >
+                <h3>我是C组件-》{{myData}}</h3>
+                <input type="button" value="把C数据传给A" @click="send" >
+                <p>接受过来的A的数据为：{{a}}</p>
+                <p>接受过来的B的数据为：{{b}}<p>
+            </div>
+        `,
+        data(){
+            return {
+                myData:"我是c数据",
+                a:'',
+                b:''
+            }
+        },
+        mounted(){
+            // var _this = this;
+            Event.$on("a-msg",function(data){   //接受a的数据
+                // _this.a = data;
+                this.a = data;
+            }.bind(this)),
+            Event.$on("b-msg",function(data){   //接受b的数据
+                // _this.b = data;
+                this.b = data;
+            }.bind(this))
+        },
+        methods:{
+            send(){
+                Event.$emit("c-msg",this.myData)
+            }
+        }
+     };
+
+       window.onload = function(){
+           var vm = new Vue({
+               el:"#box",
+               data: {
+
+               },
+               components: {
+                "com-a": A,
+                "com-b": B,
+                "com-c": C
+               }
+           })
+       }
+       
+    </script>
+</head>
+<body>
+    <div id="box">
+        <com-a></com-a>
+        <com-b></com-b>
+        <com-c></com-c>
+    </div>
+</body>
+</html>
