@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动画</title>
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css">
+    <style>
+        p{
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 0 auto;
+            /* opacity: 0; */
+        }
+
+        
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <script>
+        window.onload = function(){
+            var vm = new Vue({
+                el:"#box",
+                data:{
+                    show:false
+                },
+                methods:{
+                   
+                }
+            })
+        }
+    
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="点击显示隐藏" @click="show=!show" >
+       
+        <transition enter-active-class="bounceInDown" leave-active-class="bounceOutRight" >
+            <p v-show="show" class="animated" ></p>
+        </transition>
+    </div>
+</body>
+</html>

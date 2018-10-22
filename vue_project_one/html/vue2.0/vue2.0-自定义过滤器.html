@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>自定义过滤器</title>
     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
     <!-- <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script> -->
     <script>
-        // Vue.directive('on').keyCodes.ctrl=17;
-        Vue.config.keyCodes.ctrl=17;
+      Vue.filter('toDou',function(input,a,b){
+        //   alert(input)
+        return input<10?a:b
+      })
         window.onload=function(){
             new Vue({
                 el:'#box',
                 data:{
+                    msg:11
                 },
                 methods:{
                     change(){
@@ -27,7 +30,10 @@
 </head>
 <body>
     <div id="box">
-            <input type="text" @keyup.ctrl="change">
+        <!-- vue1.0 -->
+         <!-- {{msg | toDou '12' '5'}} -->
+        <!-- vue2.0 -->
+        {{msg | toDou('a','b')}}
     </div>
     
 </body>

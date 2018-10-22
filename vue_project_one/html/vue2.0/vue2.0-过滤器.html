@@ -9,11 +9,12 @@
     <!-- <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script> -->
     <script>
         // Vue.directive('on').keyCodes.ctrl=17;
-        Vue.config.keyCodes.ctrl=17;
+        // Vue.config.keyCodes.ctrl=17;
         window.onload=function(){
             new Vue({
                 el:'#box',
                 data:{
+                    msg:{a:1,b:2,c:3}
                 },
                 methods:{
                     change(){
@@ -27,7 +28,7 @@
 </head>
 <body>
     <div id="box">
-            <input type="text" @keyup.ctrl="change">
+         {{msg}}
     </div>
     
 </body>

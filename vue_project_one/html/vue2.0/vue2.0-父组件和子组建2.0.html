@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义过滤器</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/vue/1.0.19/vue.min.js"></script> -->
+    <script>
+     
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    a:'我是父组件的数据'
+                },
+                components:{
+                    "child-com":{
+                        data(){
+                            return {
+                                b:""
+                            }
+                        },
+                        props:["msg"],
+                        template:"#child",
+                        mounted(){
+                            this.b = this.msg;
+                        },
+                        methods:{
+                            change(){
+                                this.b = "被更改了"
+                            }
+                        }
+                    }
+                }
+            });
+        };
+       
+    </script>
+</head>
+<body>
+    <template id="child" >
+        <div>
+            <span>我是子组件</span>
+            <input type="button" value="按钮" @click="change" >
+            <strong>{{b}}</strong>
+        </div>
+    </template>
+    <div id="box">
+        父级-》{{a}}
+        <child-com :msg="a" ></child-com>  
+    </div>
+    
+</body>
+</html>
