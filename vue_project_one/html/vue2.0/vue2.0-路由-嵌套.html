@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>嵌套路由</title>
+    <style>
+        .router-link-active {
+            font-size: 18px;
+            color: red;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+    <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+   
+</head>
+<body>
+    <div id="box">
+        <div>
+            <router-link to="/home" >主页</router-link>
+            <router-link to="/user" >用户</router-link>
+            <router-link to="/news" >新闻</router-link>
+        </div>
+        <div>
+            <router-view></router-view>
+        </div> 
+    </div>
+    <script>
+        //定义组件
+        const Home = {
+            template:'<h3>我是主页</h3>'
+        };
+
+        const User = {
+            template:`
+                <div>
+                    <h3>我是一个用户</h3>
+                    <ul>
+                        <li>
+                            <router-link to="/user/username" >某个用户</router-link>
+                        </li>
+                    </ul>
+                    <div>
+                        <router-view></router-view>
+                    </div> 
+                </div>
+            `
+        };
+
+        const News = {
+            template:'<p>我是新闻</p>'
+        }
+
+        const UserDetail = {
+            template:"<div>我是某某用户</div>"
+        }
+
+        //配置路由
+        const routes = [
+            {path:'/home',component:Home},
+            {path:'/news',component:News},
+            {
+                path:'/user',
+                component:User,
+                children:[  //核心，与routes配置一模一样
+                    {path:'username',component:UserDetail}
+                ]
+            },
+            {path:'*', redirect:'/home'}    //跳转，重定向
+        ]
+
+        //生成路由实例
+        const router=new VueRouter({
+            routes
+        });
+
+        //最后将路由挂到vue上边
+        new Vue({
+            router,
+            el:"#box" 
+        })
+      
+    </script>
+</body>
+</html>
