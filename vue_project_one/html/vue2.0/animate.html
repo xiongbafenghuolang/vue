@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animate.css的用法</title>
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css">
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .border {
+            border-radius: 50%;
+        }
+
+        .outer-box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+        }
+        .left {
+            width: 200px;
+            height: 100%;
+            float: left;
+            background: #00aaff;
+        }
+        .right {
+            width: 200px;
+            height: 200px;
+            background: #00ff00;
+            /*margin-left: 200px;*/
+            display: inline-block;
+        }
+        #aside{
+            float: left;
+            margin-right: -200px;
+            width: 200px;
+            background-color: red;
+        }
+        #content{
+            float: right;
+        }
+        #content .inner{
+            margin-left: 200px;
+            background-color: blue;
+        }
+
+    </style>
+</head>
+<body>
+    <input type="button" value="点击动画">
+    <div id="box" class="animated swing zoomOutRight" ></div>
+    
+    <div class="outer-box">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+
+    <div class="outer-box">
+        <div id="aside">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore provident dolor in voluptatum tempore non, placeat obcaecati totam ut delectus libero excepturi distinctio asperiores odit nobis soluta, esse aspernatur beatae.
+        </div>
+        <div id="content">
+            <div class="inner">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia labore facere delectus quaerat expedita, tenetur recusandae tempora eos natus suscipit voluptatum necessitatibus soluta voluptates modi ullam. Ab minima similique, illum!
+            </div>
+        </div>
+    </div>
+    <script>
+        var btn = document.getElementsByTagName("input")[0];
+        var Box = document.getElementById("box");
+        btn.onclick = function(){
+            // Box.classList.add("border")
+            Box.setAttribute("class","zoomInLeft")
+        }
+    </script>
+</body>
+</html>
